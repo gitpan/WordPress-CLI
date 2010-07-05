@@ -5,7 +5,7 @@ use lib './lib';
 use WordPress::CLI::Base ':all';
 use LEOCHARRE::Basename ':all';
 use vars qw/@FILES $VERSION/;
-$VERSION = sprintf "%d.%02d", q$Revision: 1.1 $ =~ /(\d+)/g;
+$VERSION = sprintf "%d.%02d", q$Revision: 1.2 $ =~ /(\d+)/g;
 use Smart::Comments '###';
 
 use LEOCHARRE::Strings ':all';
@@ -15,7 +15,7 @@ $opt_v and print "$VERSION\n" and exit;
 
 # 1376
 
-sub usage {q{wordpres-upload-post [OPTION].. FILE
+sub usage {q{wordpres-upload-media [OPTION].. FILE..
 Upload FILE to wordpress.
 
    -d path     simple text/html file containing content description
@@ -33,7 +33,7 @@ Upload FILE to wordpress.
 * required
 ! experimental
 
-Try 'man wordpress-upload-post' for more info.
+Try 'man wordpress-upload-media' for more info.
 }}
 
 
@@ -313,17 +313,16 @@ __END__
 
 =head1 NAME
 
-wordpress-upload-post - upoad post to wordpress
+wordpress-upload-media - upoad files to wordpress
 
 =head1 DESCRIPTION
 
 If you provide a date, we check for correctness before attempt.
-If you specify a category or more, we check that they do exist.
 
 =head2 Motivation
 
-I've workded on other cli scripts to wordpress- but I found them too complex.
-This simply allows you to post content to a category in your blog, via the comand line.
+This allows you to upload media files like images etc to your wordpress
+blog. Very helpful.
 
 =head1 USAGE
 
@@ -347,7 +346,7 @@ wordpress-upload-post [OPTIONS].. [PATH|DESCRIPTION]
 =head2 USAGE EXAMPLES
 
 Load the login info from a file:
-   wordpress-upload-post -d ./content.txt -t 'Red House Found' -C ./conf.txt 
+   wordpress-upload-media -d ./content.txt -t 'Red House Found' -C ./conf.txt file.jpg
 
 Login conf example file:
 
@@ -355,14 +354,12 @@ Login conf example file:
    -p passew2t42t
    -x http://jimmysite.net/xmlrpc.php
 
-Set a date for the post, also upload to category 'yummy' and 'broke', you can also specify 
-an id for a category instead, we check that the category exists.
-
-   wordpress-upload-post -D 'June 2001' -t 'simple title' -c 'yummy,broke,35' -u leo -p 2g32 -x http://site.com/xmlrpc.php
 
 You may specify the file with content for the description (the body of the post), via -d
-argument or via an argument. Not both, and not more than one.
-
+argument. The -d argument may also be a string instead. We check for existence first,
+to see if it is a file path arg.
+(This needs to be improved, potentially you an end up setting description to look like a
+file path just because it's not on disk..)
 
 =head3 clean description text flag
 
@@ -427,6 +424,8 @@ line to wordpress, you have to learn the basics- there's no going around this. A
 =head1 SEE ALSO
 
 WordPress::XMLRPC
+wordpress-upload-post
+wordpress-info
 WordPress::CLI - parent package
 
 =head1 AUTHOR

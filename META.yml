@@ -1,6 +1,6 @@
 --- #YAML:1.0
 name:               WordPress-CLI
-version:            1.03
+version:            1.04
 abstract:           command line access to wordpress
 author:
     - Leo Charre leocharre at cpan dot org

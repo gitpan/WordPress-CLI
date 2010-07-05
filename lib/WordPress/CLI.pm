@@ -1,7 +1,5 @@
 package WordPress::CLI;
-
-our $VERSION = sprintf "%d.%02d", q$Revision: 1.3 $ =~ /(\d+)/g;
-
+our $VERSION = sprintf "%d.%02d", q$Revision: 1.4 $ =~ /(\d+)/g;
 
 1;
 
@@ -25,11 +23,11 @@ Main documentation..
 
 =over 4
 
-=item L<bin/wordpress-upload-post>
+=item L<bin/wordpress-upload-post> - create a new post in wordpress
 
-=item L<bin/wordpress-upload-media>
+=item L<bin/wordpress-upload-media> - upload a file to wordpress
 
-=item L<bin/wordpress-info>
+=item L<bin/wordpress-info> - get info on posts and files etc
 
 =back
 
